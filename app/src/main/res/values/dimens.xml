@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="match_constraints">0dp</dimen>
+    <dimen name="movie_title_dimen">30sp</dimen>
+    <dimen name="margin_default">15dp</dimen>
+    <dimen name="default_drawable_padding">8dp</dimen>
+    <dimen name="heart_toggle_dimen">36dp</dimen>
+    <dimen name="similar_movie_dimen">100dp</dimen>
+
+</resources>
