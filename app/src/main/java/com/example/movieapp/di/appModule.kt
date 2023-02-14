@@ -1,6 +1,7 @@
 package com.example.movieapp.di
 
 import com.example.movieapp.api.MovieAppApi
+import com.example.movieapp.repository.MovieRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -22,6 +23,8 @@ val appModule = module {
             .build()
             .create(MovieAppApi::class.java)
     }
+
+    single {MovieRepository(get())}
 
 
 

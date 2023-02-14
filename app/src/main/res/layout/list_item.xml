@@ -45,16 +45,4 @@
         tools:text="TextView"
         android:textColor="@color/white" />
 
-    <TextView
-        android:id="@+id/similar_movie_genre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/similar_movie_title"
-        app:layout_constraintStart_toEndOf="@id/release_year_similar_movie"
-        android:layout_marginTop="@dimen/margin_default"
-        android:layout_marginStart="@dimen/margin_default"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        tools:text="TextView"
-        android:textColor="@color/white"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
