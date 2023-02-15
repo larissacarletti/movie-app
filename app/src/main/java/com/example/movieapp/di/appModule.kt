@@ -2,8 +2,10 @@ package com.example.movieapp.di
 
 import com.example.movieapp.api.MovieAppApi
 import com.example.movieapp.repository.MovieRepository
+import com.example.movieapp.viewmodel.MovieViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,7 +26,9 @@ val appModule = module {
             .create(MovieAppApi::class.java)
     }
 
-    single {MovieRepository(get())}
+    single {MovieRepository(get(),get(),get())}
+
+    viewModel { MovieViewModel(get()) }
 
 
 

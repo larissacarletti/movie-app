@@ -9,13 +9,13 @@ import retrofit2.http.Query
 
 interface MovieAppApi {
     @GET("movie/{movie_id}")
-    fun getMovieInformation(
+    fun getMovie(
         @Path("movie_id") movieId: String,
         @Query("api_key") apiKey: String
     ): Response<Movie>
 
     @GET("/movie/{movie_id}/similar")
-    fun getSimilarMovieInformation(
+    fun getSimilarMovie(
         @Path("movie_id") movieId: String,
         @Query("api_key") apiKey: String
     ): Response<SimilarMovies>

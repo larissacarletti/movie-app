@@ -92,7 +92,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/similar_movies_recycler_view"
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/margin_default"
@@ -104,6 +104,7 @@
         </androidx.recyclerview.widget.RecyclerView>
 
         <ProgressBar
+            android:id="@+id/progress_bar"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
