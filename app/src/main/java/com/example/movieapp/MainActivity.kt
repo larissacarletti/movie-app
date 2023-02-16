@@ -47,10 +47,12 @@ class MainActivity : AppCompatActivity() {
 //        )
 //    }
 
-    fun showSimiliarMovies() {
-        setRecyclerView()
-        viewModel.getSimilarMovieInformation()
-    }
+//    fun showSimiliarMovies() {
+//        setRecyclerView()
+//        viewModel.getSimilarMovieInformation().observe(this) {
+//
+//        }
+//    }
 
 
 
