@@ -1,24 +1,22 @@
 package com.example.movieapp.viewmodel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
-import com.example.movieapp.api.MovieAppApi
 import com.example.movieapp.model.movie.Movie
 import com.example.movieapp.model.similarmovies.SimilarMovies
 import com.example.movieapp.repository.MovieRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
-class MovieViewModel (private val repository: MovieRepository, private val movieAppApi: MovieAppApi) : ViewModel() {
+class MovieViewModel (repository: MovieRepository) : ViewModel() {
 
-    private val movie = repository.getMovieRep().body()!!.asLiveData()
+    private val _movie = MutableLiveData<Movie>()
+    private val _similarMovies = MutableLiveData<SimilarMovies>()
+    val movie: LiveData<Movie> = _movie
+    val similarMovies: LiveData<SimilarMovies> = _similarMovies
 
-    fun getMovieInformation() : LiveData<Movie> {
-        repository.getMovieRep().body()!!.asLiveData()
+    init {
+        _movie.postValue(repository.getMovieRep().body())
+        _similarMovies.postValue(repository.getSimilarMoviesRep().body())
     }
-
-
 
 }

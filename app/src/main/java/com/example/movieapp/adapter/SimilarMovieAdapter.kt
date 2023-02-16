@@ -1,15 +1,13 @@
 package com.example.movieapp.adapter
 
 import android.view.LayoutInflater
-import android.view.OnReceiveContentListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.movieapp.MainActivity
 import com.example.movieapp.databinding.ListItemBinding
 import com.example.movieapp.model.similarmovies.SimilarMovie
 
-class SimilarMovieAdapter (listener: MainActivity): RecyclerView.Adapter<SimilarMovieAdapter.SimilarMovieViewHolder>() {
+class SimilarMovieAdapter : RecyclerView.Adapter<SimilarMovieAdapter.SimilarMovieViewHolder>() {
 
     private var similarMovieList = ArrayList<SimilarMovie>()
 

@@ -1,9 +1,8 @@
 package com.example.movieapp
 
-import android.opengl.Visibility
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movieapp.adapter.SimilarMovieAdapter
@@ -22,14 +21,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        showMovie()
+        //showSimiliarMovies()
+
 
     }
     private fun setRecyclerView() = binding.run {
-        similarMovieAdapter = SimilarMovieAdapter(this@MainActivity)
+        similarMovieAdapter = SimilarMovieAdapter()
         recyclerView.layoutManager= LinearLayoutManager(this@MainActivity)
         recyclerView.adapter = similarMovieAdapter
     }
-    fun setMovieInformation(movie: Movie) = binding.run {
+    private fun setMovieInformation(movie: Movie) = binding.run {
         movieTitle.text = movie.title
         movieDescription.text = movie.overview
         movieGenre.text = "${movie.genres.map {  genre -> genre.name }}"
@@ -41,17 +43,21 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    fun showMovie() = binding.run {
-//        progressBar.visibility = View.VISIBLE
-//        viewModel.getMovieInformation(
-//        )
-//    }
+    private fun showMovie() = binding.run {
+        progressBar.visibility = View.VISIBLE
+        viewModel.movie.observe(this@MainActivity) {
+            setMovieInformation(it)
+            progressBar.visibility = View.VISIBLE
+        }
+    }
 
-//    fun showSimiliarMovies() {
+//    private fun showSimiliarMovies() {
 //        setRecyclerView()
-//        viewModel.getSimilarMovieInformation().observe(this) {
-//
+//        viewModel.similarMovies.observe(this) {
+//            similarMovieAdapter
 //        }
+//
+//
 //    }
 
 
