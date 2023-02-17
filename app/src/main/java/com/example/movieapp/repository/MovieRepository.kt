@@ -1,5 +1,6 @@
 package com.example.movieapp.repository
 
+import com.example.movieapp.BuildConfig
 import com.example.movieapp.api.MovieAppApi
 import com.example.movieapp.model.movie.Movie
 import com.example.movieapp.model.similarmovies.SimilarMovies
@@ -9,8 +10,8 @@ class MovieRepository (
     private val movieApi: MovieAppApi,
 ) {
 
-    private lateinit var apiKey: String
-    private lateinit var movieId: String
+    private val apiKey: String = BuildConfig.API_KEY
+    private val movieId: String = "299534-avengers-endgame"
 
    fun getMovieRep(): Response<Movie> {
        return movieApi.getMovie(movieId, apiKey)
