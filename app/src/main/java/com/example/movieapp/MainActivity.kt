@@ -1,5 +1,6 @@
 package com.example.movieapp
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -7,9 +8,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -21,46 +20,38 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel by viewModel<MovieViewModel>()
     private lateinit var similarMovieAdapter: SimilarMovieAdapter
-    private lateinit var dataStore : DataStore<Preferences>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        dataStore = preferencesDataStore("settings")
-
-        binding.favoriteButton.setOnClickListener {
-            lifecycleScope.launch {
-
-            }
-        }
-
-
         showMovie()
         showSimiliarMovies()
+        setupFavorite()
     }
 
     private suspend fun save(key: String, value: Boolean) {
-        val dataStoreKey = booleanPreferencesKey(key)
-        dataStore.edit { settings ->
-            settings[dataStoreKey] = value
+        dataStore.edit { it[booleanPreferencesKey(key)] = value }
+    }
+
+    private suspend fun read(key: String): Boolean? {
+        return dataStore.data.first()[booleanPreferencesKey(key)]
+    }
+
+    private fun setupFavorite() = binding.run {
+        lifecycleScope.launch { favoriteButton.isChecked = read("favorite") ?: false }
+        favoriteButton.setOnCheckedChangeListener { _, isChecked ->
+            lifecycleScope.launch { save("favorite", isChecked) }
         }
     }
-
-    private suspend fun read(key: String): String? {
-        val dataStoreKey = stringPreferencesKey(key)
-        val preferences = dataStore.data.first()
-        return preferences[dataStoreKey]
-    }
-
-
-
 
     private fun setRecyclerView() = binding.run {
         similarMovieAdapter = SimilarMovieAdapter()
