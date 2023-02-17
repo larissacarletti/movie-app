@@ -22,9 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         showMovie()
-        //showSimiliarMovies()
-
-
+        showSimiliarMovies()
     }
     private fun setRecyclerView() = binding.run {
         similarMovieAdapter = SimilarMovieAdapter()
@@ -40,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         Glide.with(movieBanner)
             .load("https://image.tmdb.org/t/p/original/${movie.posterPath}")
             .into(movieBanner)
-
     }
 
     private fun showMovie() = binding.run {
@@ -51,16 +48,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    private fun showSimiliarMovies() {
-//        setRecyclerView()
-//        viewModel.similarMovies.observe(this) {
-//            similarMovieAdapter
-//        }
-//
-//
-//    }
-
-
-
-
+    private fun showSimiliarMovies() {
+        setRecyclerView()
+        viewModel.similarMovies.observe(this) {
+            similarMovieAdapter.getSimilarMoviesList(it)
+        }
+    }
 }

@@ -26,7 +26,7 @@ val appModule = module {
             .create(MovieAppApi::class.java)
     }
 
-    single {MovieRepository(get(),get(),get())}
+    single {MovieRepository(get())}
 
     viewModel { MovieViewModel(get()) }
 

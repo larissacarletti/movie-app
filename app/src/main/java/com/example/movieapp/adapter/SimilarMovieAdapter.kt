@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.ListItemBinding
 import com.example.movieapp.model.similarmovies.SimilarMovie
+import com.example.movieapp.model.similarmovies.SimilarMovies
 
 class SimilarMovieAdapter : RecyclerView.Adapter<SimilarMovieAdapter.SimilarMovieViewHolder>() {
 
@@ -32,5 +33,11 @@ class SimilarMovieAdapter : RecyclerView.Adapter<SimilarMovieAdapter.SimilarMovi
         val similarMoviePoster = binding.similarMovieBanner
         val similarMovieTitle = binding.similarMovieTitle
         val similarMovieYear = binding.releaseYearSimilarMovie
+    }
+
+    fun getSimilarMoviesList(similarMovies: SimilarMovies) {
+        val similarMovieList  = similarMovies.similarMovies
+        this.similarMovieList = similarMovieList
+        notifyDataSetChanged()
     }
 }

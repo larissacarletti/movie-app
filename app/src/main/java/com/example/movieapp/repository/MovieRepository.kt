@@ -7,9 +7,11 @@ import retrofit2.Response
 
 class MovieRepository (
     private val movieApi: MovieAppApi,
-    private val apiKey: String,
-    private val movieId : String
 ) {
+
+    private lateinit var apiKey: String
+    private lateinit var movieId: String
+
    fun getMovieRep(): Response<Movie> {
        return movieApi.getMovie(movieId, apiKey)
     }
