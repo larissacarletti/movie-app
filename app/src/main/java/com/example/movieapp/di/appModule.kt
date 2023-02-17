@@ -14,7 +14,7 @@ val appModule = module {
 
     single {
         Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/")
+            .baseUrl("https://api.themoviedb.org/3/")
             .client(
                 OkHttpClient.Builder()
                     .addInterceptor(

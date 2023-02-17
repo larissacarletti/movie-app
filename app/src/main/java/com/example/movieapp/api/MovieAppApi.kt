@@ -14,7 +14,7 @@ interface MovieAppApi {
         @Query("api_key") apiKey: String
     ): Response<Movie>
 
-    @GET("/movie/{movie_id}/similar")
+    @GET("movie/{movie_id}/similar")
     suspend fun getSimilarMovie(
         @Path("movie_id") movieId: String,
         @Query("api_key") apiKey: String

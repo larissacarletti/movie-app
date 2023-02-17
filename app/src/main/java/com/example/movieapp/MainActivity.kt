@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
         viewModel.movie.observe(this@MainActivity) {
             setMovieInformation(it)
-            progressBar.visibility = View.VISIBLE
+            progressBar.visibility = View.INVISIBLE
         }
     }
 

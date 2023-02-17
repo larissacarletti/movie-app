@@ -11,12 +11,12 @@ class MovieRepository (
 ) {
 
     private val apiKey: String = BuildConfig.API_KEY
-    private val movieId: String = "299534-avengers-endgame"
+    private val movieId: String = "299534"
 
-   suspend fun getMovieRep(): Movie {
-       return movieApi.getMovie(movieId, apiKey).body()!!
+   suspend fun getMovieRep(): Movie? {
+       return movieApi.getMovie(movieId, apiKey).body()
     }
-    suspend fun getSimilarMoviesRep(): SimilarMovies{
-        return movieApi.getSimilarMovie(movieId,apiKey).body()!!
+    suspend fun getSimilarMoviesRep(): SimilarMovies? {
+        return movieApi.getSimilarMovie(movieId,apiKey).body()
     }
 }
