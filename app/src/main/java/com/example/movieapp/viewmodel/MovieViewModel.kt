@@ -7,9 +7,18 @@ import com.example.movieapp.repository.MovieRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MovieViewModel (repository: MovieRepository) : ViewModel() {
+class MovieViewModel(repository: MovieRepository) : ViewModel() {
 
-    val movie : LiveData<Movie> = liveData { repository.getMovieRep() }
-    val similarMovies: LiveData<SimilarMovies> = liveData { repository.getSimilarMoviesRep() }
 
+    private val _movie = MutableLiveData<Movie>()
+    private val _similarMovies = MutableLiveData<SimilarMovies>()
+    val movie: LiveData<Movie> = _movie
+    val similarMovies: LiveData<SimilarMovies> = _similarMovies
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            _movie.postValue(repository.getMovieRep())
+            _similarMovies.postValue(repository.getSimilarMoviesRep())
+        }
+    }
 }
